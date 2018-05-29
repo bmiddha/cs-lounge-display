@@ -1,0 +1,23 @@
+{
+  "name": "cs-lounge-display",
+  "version": "1.0.0",
+  "description": "A web app that displays info and upcomming events about the CS depratment and CS student organisations at UIC",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lugatuic/cs-lounge-display.git"
+  },
+  "author": "Bharat Middha",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lugatuic/cs-lounge-display/issues"
+  },
+  "homepage": "https://github.com/lugatuic/cs-lounge-display#readme",
+  "devDependencies": {
+    "nodemon": "^1.17.5"
+  }
+}
