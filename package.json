@@ -18,6 +18,12 @@
   },
   "homepage": "https://github.com/lugatuic/cs-lounge-display#readme",
   "devDependencies": {
+    "gulp": "^3.9.1",
     "nodemon": "^1.17.5"
+  },
+  "dependencies": {
+    "dotenv": "^5.0.1",
+    "express": "^4.16.3",
+    "ical": "^0.5.0"
   }
 }
