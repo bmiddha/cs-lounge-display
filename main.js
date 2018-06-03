@@ -82,11 +82,16 @@ function getEvents(cal) {
 	getApiData("calendar", "cal", cal).then((result) => {
 		let k = 1;
 		let content = "";
-		let dtNow = newDate();
+		let dtNow = new Date();
+		let oldEvents = 0;
 		while (k < result.length) {
-			if (k > 4) break;
+			if (k > 4+oldEvents) break;
 			let dtStart = new Date(result[k].timeStart);
-			if (dtStart < dtNow) continue;
+			if (dtStart < dtNow) {
+				oldEvents++;
+				k++;
+				continue;
+			}
 			let tmStartHour = dtStart.getHours();
 			let tmStartAmPm = "AM";
 			if (tmStartHour > 12) {
@@ -141,7 +146,6 @@ function getWeather(city) {
 getWeather("chicago");
 timeAndDate();
 
-
 var activeOrg = 0;
 var counter = 0;
 
@@ -153,17 +157,17 @@ function updateActiveOrg() {
 	getEvents(orgData[orgs[activeOrg]].calendar);
 	document.querySelector("#org-name").innerHTML = orgData[orgs[activeOrg]].name;
 	document.querySelector("#org-logo>img").src = orgData[orgs[activeOrg]].logo;
-	divChild = activeOrg+1;
+	divChild = activeOrg + 1;
 	divPreviousChild = (divChild == 1) ? orgs.length : divChild - 1;
-	document.querySelector("footer>div:nth-child("+divPreviousChild+")").classList.remove("active");
-	document.querySelector("footer>div:nth-child("+divChild+")").classList.add("active");
+	document.querySelector("#org-list>span:nth-child(" + divPreviousChild + ")").classList.remove("active");
+	document.querySelector("#org-list>span:nth-child(" + divChild + ")").classList.add("active");
 	setTimeout(updateActiveOrg, 15000)
 }
 
 function footerImages() {
-	document.querySelector("footer").innerHTML = "";
-	for (let j = 0; j< orgs.length;j++)
-		document.querySelector("footer").innerHTML += "<div><img src='"+orgData[orgs[j]].logo+ "'alt='"+orgData[orgs[j]].name+"'></div>";	
+	document.querySelector("#org-list").innerHTML = "";
+	for (let j = 0; j < orgs.length; j++)
+		document.querySelector("#org-list").innerHTML += "<span><img src='" + orgData[orgs[j]].logo + "'alt='" + orgData[orgs[j]].name + "'></span>";
 }
 
 footerImages();

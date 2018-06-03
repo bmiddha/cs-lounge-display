@@ -1,0 +1,24 @@
+body
+	margin: 0
+img
+	height: 70px
+.wrapper
+	display: grid
+	grid-template-areas: "org time weather" "motd events events" "highlights events events" "orgs orgs orgs"
+	// grid-template-columns: 1fr 1fr 1fr
+	// grid-template-rows: 1fr 1fr 1fr
+
+#org-header
+	grid-area: org
+#time
+	grid-area: time
+#weather
+	grid-area: weather
+#motd
+	grid-area: motd
+#highlights
+	grid-area: highlights
+#events
+	grid-area: events
+#org-list
+	grid-area: orgs
