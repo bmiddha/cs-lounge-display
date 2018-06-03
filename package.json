@@ -1,7 +1,7 @@
 {
   "name": "cs-lounge-display",
   "version": "1.0.0",
-  "description": "A web app that displays info and upcomming events about the CS depratment and CS student organisations at UIC",
+  "description": "A web app that displays info and upcoming events about the CS department and CS student organizations at UIC",
   "main": "server.js",
   "scripts": {
     "dev": "nodemon server.js",
