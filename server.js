@@ -1,4 +1,4 @@
-const dotenv = require('dotenv');
+require("dotenv").config();
 const ical = require('ical');
 const http = require("http");
 const fs = require("fs");

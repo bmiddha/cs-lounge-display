@@ -81,7 +81,7 @@ function timeAndDate() {
 function getEvents(cal) {
 	getApiData("calendar", "cal", cal).then((result) => {
 		let k = 1;
-		document.querySelector("#events").innerHTML = "";
+		let content = "";
 		while (k < result.length) {
 			if (k > 4) break;
 			let dtStart = new Date(result[k].timeStart);
@@ -102,11 +102,14 @@ function getEvents(cal) {
 			}
 			tmEndHour = addZero(tmEndHour);
 			tmEnd = DAYS[dtEnd.getDay()] + ", " + MONTHS[dtEnd.getMonth()] + " " + dtEnd.getDate() + " " + tmEndHour + ":" + addZero(dtEnd.getMinutes()) + tmEndAmPm;
-			document.querySelector("#events").innerHTML += "<li><span class=summary>" + result[k].summary + "</span>"
-			document.querySelector("#events").innerHTML += "<span class=location>" + result[k].location + "</span>"
-			document.querySelector("#events").innerHTML += "<span class=timeStart>" + tmStart + "</span>"
-			document.querySelector("#events").innerHTML += "<span class=timeEnd>" + tmEnd + "</span>"
-			document.querySelector("#events").innerHTML += "<span class=description>" + result[k].description + "</span></li>";
+			content += "<li>";
+			content += "<span class=summary>" + result[k].summary + "</span>"
+			content += "<span class=location>" + result[k].location + "</span>"
+			content += "<span class=timeStart>" + tmStart + "</span>"
+			content += "<span class=timeEnd>" + tmEnd + "</span>"
+			content += "<span class=description>" + result[k].description + "</span>";
+			content += "</li>";
+			document.querySelector("#events").innerHTML = content;
 			k++;
 		}
 	});
@@ -137,23 +140,29 @@ getWeather("chicago");
 timeAndDate();
 
 
-var activeOrg = "";
+var activeOrg = 0;
 var counter = 0;
 
 function updateActiveOrg() {
 	activeOrg = counter % orgs.length;
-	// console.log(orgData[orgs[activeOrg]]);
 	counter++;
 	getMotd(orgData[orgs[activeOrg]].motd);
 	getHighlights(orgData[orgs[activeOrg]].highlights);
 	getEvents(orgData[orgs[activeOrg]].calendar);
 	document.querySelector("#org-name").innerHTML = orgData[orgs[activeOrg]].name;
 	document.querySelector("#org-logo>img").src = orgData[orgs[activeOrg]].logo;
-	console.log(activeOrg);
-	// let a = "footer>div:nth-child("+ activeOrg )";
-	// console.log(document.querySelector(a).classList);
-	setTimeout(updateActiveOrg, 3000)
+	divChild = activeOrg+1;
+	divPreviousChild = (divChild == 1) ? orgs.length : divChild - 1;
+	document.querySelector("footer>div:nth-child("+divPreviousChild+")").classList.remove("active");
+	document.querySelector("footer>div:nth-child("+divChild+")").classList.add("active");
+	setTimeout(updateActiveOrg, 15000)
 }
 
+function footerImages() {
+	document.querySelector("footer").innerHTML = "";
+	for (let j = 0; j< orgs.length;j++)
+		document.querySelector("footer").innerHTML += "<div><img src='"+orgData[orgs[j]].logo+ "'alt='"+orgData[orgs[j]].name+"'></div>";	
+}
 
+footerImages();
 updateActiveOrg();
