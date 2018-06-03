@@ -8,7 +8,7 @@ orgData["acm"] = {
 	acronym: "ACM",
 	motd: "files/acm.motd",
 	highlights: "files/acm.highlights",
-	calendar: ""
+	calendar: "https://calendar.google.com/calendar/ical/kc72g1ctfg8b88df34qqb62d1s%40group.calendar.google.com/public/basic.ics"
 };
 orgData["lug"] = {
 	name: "Linux Users Group",
@@ -16,7 +16,7 @@ orgData["lug"] = {
 	acronym: "LUG",
 	motd: "files/lug.motd",
 	highlights: "files/lug.highlights",
-	calendar: ""
+	calendar: "https://calendar.google.com/calendar/ical/ca149os3pmnh0dcopr1jn2negg%40group.calendar.google.com/public/basic.ics"
 };
 orgData["wics"] = {
 	name: "Women in Computer Science",
@@ -82,9 +82,11 @@ function getEvents(cal) {
 	getApiData("calendar", "cal", cal).then((result) => {
 		let k = 1;
 		let content = "";
+		let dtNow = newDate();
 		while (k < result.length) {
 			if (k > 4) break;
 			let dtStart = new Date(result[k].timeStart);
+			if (dtStart < dtNow) continue;
 			let tmStartHour = dtStart.getHours();
 			let tmStartAmPm = "AM";
 			if (tmStartHour > 12) {
