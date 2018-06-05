@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+body {
+  font-family: 'Montserrat';
+  margin: 0;
+}
+
+.wrapper {
+  font-size: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  height: 100vh;
+}
+
+.header, .center, .footer {
+  display: flex;
+  flex-direction: row;
+}
+
+.header, .footer {
+  flex: 1;
+  align-items: center;
+}
+
+.header {
+  border-bottom: solid;
+  padding: 10px 2ch;
+}
+
+.center {
+  flex: 8;
+}
+
+#org-header {
+  flex: none;
+  display: block;
+  align-items: center;
+  #org-logo {
+    img {
+      max-width: 23vw;
+    }
+  }
+  #org-name {
+    display: none;
+    margin: 0 1ch;
+    font-size: 40px;
+  }
+}
+
+#time, #weather {
+  text-align: center;
+  flex: 1;
+  font-size: 45px;
+  p {
+    margin: 0;
+  }
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 0 2ch;
+  justify-content: space-evenly;
+  border-right: solid;
+  div {
+    text-align: center;
+  }
+}
+
+.main {
+  flex: 3;
+}
+
+#events {
+  padding: 0 2ch;
+  p {
+    display: grid;
+    li {
+      display: grid;
+      grid-template: "summary timeStart"
+                     "location timeEnd";
+      padding-bottom: 1em;
+      .summary {
+				grid-area: summary;
+      }
+			.location {
+				grid-area: location;
+      }
+			.timeStart {
+				grid-area: timeStart;
+      }
+			.timeEnd {
+				grid-area: timeEnd;
+      }
+      .timeStart, .timeEnd {
+        text-align: right;
+      }
+    }
+  }
+}
+
+#org-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  padding: .5em 0;
+  border-top: solid;
+  img {
+    height: 10vh;
+  }
+  span {
+    img {
+      filter: grayscale(100);
+      opacity: 0.5;
+      transition: opacity 1s;
+      transition: filter 1s;
+    }
+  }
+  .active {
+    img {
+      filter: grayscale(0);
+      opacity: 1;
+    }
+  }
+}
