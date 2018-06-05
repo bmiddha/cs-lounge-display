@@ -1,105 +1,134 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat");
 body {
+  font-family: 'Montserrat';
   margin: 0;
-  font-family: "Montserrat"; }
+}
 
 .wrapper {
-  display: grid;
-  grid-template-areas: "org time weather" "motd events events" "highlights events events" "orgs orgs orgs";
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 150px 1fr 2fr 150px;
-  height: 100vh; }
+  font-size: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  height: 100vh;
+}
+
+.header, .center, .footer {
+  display: flex;
+  flex-direction: row;
+}
+
+.header, .footer {
+  flex: 1;
+  align-items: center;
+}
+
+.header {
+  border-bottom: solid;
+  padding: 10px 2ch;
+}
+
+.center {
+  flex: 8;
+}
 
 #org-header {
-  grid-area: org; }
+  flex: none;
+  display: block;
+  align-items: center;
+}
 
-#time {
-  grid-area: time; }
+#org-header #org-logo img {
+  max-width: 23vw;
+}
 
-#weather {
-  grid-area: weather; }
+#org-header #org-name {
+  display: none;
+  margin: 0 1ch;
+  font-size: 40px;
+}
 
-#motd {
-  grid-area: motd; }
+#time, #weather {
+  text-align: center;
+  flex: 1;
+  font-size: 45px;
+}
 
-#highlights {
-  grid-area: highlights; }
+#time p, #weather p {
+  margin: 0;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 0 2ch;
+  justify-content: space-evenly;
+  border-right: solid;
+}
+
+.sidebar div {
+  text-align: center;
+}
+
+.main {
+  flex: 3;
+}
 
 #events {
-  grid-area: events; }
+  padding: 0 2ch;
+}
+
+#events p {
+  display: grid;
+}
+
+#events p li {
+  display: grid;
+  grid-template: "summary timeStart" "location timeEnd";
+  padding-bottom: 1em;
+}
+
+#events p li .summary {
+  grid-area: summary;
+}
+
+#events p li .location {
+  grid-area: location;
+}
+
+#events p li .timeStart {
+  grid-area: timeStart;
+}
+
+#events p li .timeEnd {
+  grid-area: timeEnd;
+}
+
+#events p li .timeStart, #events p li .timeEnd {
+  text-align: right;
+}
 
 #org-list {
-  grid-area: orgs; }
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  padding: .5em 0;
+  border-top: solid;
+}
 
-#org-header, #time, #weather, #motd, #highlights, #org-list, #events {
-  outline: 1px solid;
-  height: 100%;
-  width: 100%; }
+#org-list img {
+  height: 10vh;
+}
 
-.wrapper {
-  font-size: 25px; }
-  .wrapper #events {
-    list-style: none; }
-    .wrapper #events li {
-      display: grid;
-      grid-template-areas: "summary description" "timeStart description" "timeEnd location";
-      grid-template-columns: 1fr 1fr;
-      border: 1px solid;
-      padding: 25px; }
-      .wrapper #events li .summary {
-        grid-area: summary; }
-      .wrapper #events li .location {
-        grid-area: location; }
-      .wrapper #events li .timeStart {
-        grid-area: timeStart; }
-      .wrapper #events li .timeEnd {
-        grid-area: timeEnd; }
-  .wrapper #weather {
-    font-size: 70px; }
-    .wrapper #weather span {
-      margin: 0 10px; }
-  .wrapper #org-header {
-    display: grid;
-    grid-template-areas: "logo name";
-    grid-template-columns: 1fr 3fr; }
-    .wrapper #org-header #org-logo {
-      text-align: right;
-      grid-area: logo; }
-      .wrapper #org-header #org-logo img {
-        position: relative;
-        margin: 15px;
-        height: 125px; }
-    .wrapper #org-header #org-name {
-      grid-area: name;
-      font-size: 45px;
-      margin-top: 15px; }
-  .wrapper #time {
-    font-size: 70px; }
-  .wrapper #motd, .wrapper #highlights, .wrapper #time, .wrapper #weather, .wrapper #org-list {
-    text-align: center; }
-    .wrapper #motd p, .wrapper #highlights p, .wrapper #time p, .wrapper #weather p, .wrapper #org-list p {
-      position: relative;
-      margin: 0;
-      top: 50%;
-      left: 50%;
-      -webkit-transform: translate(-50%, -50%);
-      -ms-transform: translate(-50%, -50%);
-      transform: translate(-50%, -50%); }
-  .wrapper #org-list span img {
-    height: 100px;
-    margin: 13px 200px;
-    -webkit-filter: grayscale(100);
-    filter: grayscale(100);
-    opacity: 0.5;
-    -webkit-transition: opacity 1s;
-    -o-transition: opacity 1s;
-    transition: opacity 1s;
-    -webkit-transition: -webkit-filter 1s;
-    transition: -webkit-filter 1s;
-    -o-transition: filter 1s;
-    transition: filter 1s;
-    transition: filter 1s, -webkit-filter 1s; }
-  .wrapper #org-list .active img {
-    -webkit-filter: grayscale(0);
-    filter: grayscale(0);
-    opacity: 1; }
+#org-list span img {
+  filter: grayscale(100);
+  opacity: 0.5;
+  transition: opacity 1s;
+  transition: filter 1s;
+}
+
+#org-list .active img {
+  filter: grayscale(0);
+  opacity: 1;
+}
