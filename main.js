@@ -116,7 +116,7 @@ function getEvents(cal) {
 			content += "<span class=location>" + result[k].location + "</span>"
 			content += "<span class=timeStart>" + tmStart + "</span>"
 			content += "<span class=timeEnd>" + tmEnd + "</span>"
-			content += "<span class=description>" + result[k].description + "</span>";
+			// content += "<span class=description>" + result[k].description + "</span>";
 			content += "</li>";
 			document.querySelector("#events>p").innerHTML = content;
 			k++;
