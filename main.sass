@@ -1,13 +1,13 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat')
 body
 	margin: 0
-img
-	height: 70px
+	font-family: "Montserrat"
 .wrapper
 	display: grid
 	grid-template-areas: "org time weather" "motd events events" "highlights events events" "orgs orgs orgs"
-	// grid-template-columns: 1fr 1fr 1fr
-	// grid-template-rows: 1fr 1fr 1fr
-
+	grid-template-columns: 1fr 1fr 1fr
+	grid-template-rows: 150px 1fr 2fr 150px
+	height: 100vh
 #org-header
 	grid-area: org
 #time
@@ -22,3 +22,75 @@ img
 	grid-area: events
 #org-list
 	grid-area: orgs
+#org-header,#time,#weather,#motd,#highlights,#org-list,#events
+	// border: 1px solid
+	outline: 1px solid
+	height: 100%
+	width: 100%
+
+.wrapper
+	font-size: 25px
+	#events
+		list-style: none
+		li
+			display: grid
+			grid-template-areas: "summary description" "timeStart description" "timeEnd location"
+			grid-template-columns: 1fr 1fr
+			border: 1px solid
+			padding: 25px
+			.summary
+				grid-area: summary
+			.location
+				grid-area: location
+			.timeStart
+				grid-area: timeStart			
+			.timeEnd
+				grid-area: timeEnd
+			span
+	#weather
+		font-size: 70px		
+		span
+			margin: 0 10px
+
+	#org-header
+		display: grid
+		grid-template-areas: "logo name"
+		grid-template-columns: 1fr 3fr
+		#org-logo
+			text-align: right
+			grid-area: logo
+			img
+				position: relative
+				margin: 15px
+				height: 125px
+		#org-name
+			grid-area: name
+			font-size: 45px
+			margin-top: 15px
+	#time
+		font-size: 70px
+	#motd,#highlights,#time,#weather,#org-list
+		text-align: center
+		p
+			position: relative
+			margin: 0
+			top: 50%
+			left: 50%
+			transform: translate(-50%,-50%)
+	#org-list
+		span
+			img
+				height: 100px
+				margin: 13px 200px
+				filter: grayscale(100)
+				opacity: 0.5
+				transition: opacity 1s
+				transition: filter 1s
+		.active
+			img
+				filter: grayscale(0)
+				opacity: 1
+				
+
+	#motd
+		// font-size: 50px

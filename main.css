@@ -1,12 +1,14 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat");
 body {
-  margin: 0; }
-
-img {
-  height: 70px; }
+  margin: 0;
+  font-family: "Montserrat"; }
 
 .wrapper {
   display: grid;
-  grid-template-areas: "org time weather" "motd events events" "highlights events events" "orgs orgs orgs"; }
+  grid-template-areas: "org time weather" "motd events events" "highlights events events" "orgs orgs orgs";
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 150px 1fr 2fr 150px;
+  height: 100vh; }
 
 #org-header {
   grid-area: org; }
@@ -28,3 +30,76 @@ img {
 
 #org-list {
   grid-area: orgs; }
+
+#org-header, #time, #weather, #motd, #highlights, #org-list, #events {
+  outline: 1px solid;
+  height: 100%;
+  width: 100%; }
+
+.wrapper {
+  font-size: 25px; }
+  .wrapper #events {
+    list-style: none; }
+    .wrapper #events li {
+      display: grid;
+      grid-template-areas: "summary description" "timeStart description" "timeEnd location";
+      grid-template-columns: 1fr 1fr;
+      border: 1px solid;
+      padding: 25px; }
+      .wrapper #events li .summary {
+        grid-area: summary; }
+      .wrapper #events li .location {
+        grid-area: location; }
+      .wrapper #events li .timeStart {
+        grid-area: timeStart; }
+      .wrapper #events li .timeEnd {
+        grid-area: timeEnd; }
+  .wrapper #weather {
+    font-size: 70px; }
+    .wrapper #weather span {
+      margin: 0 10px; }
+  .wrapper #org-header {
+    display: grid;
+    grid-template-areas: "logo name";
+    grid-template-columns: 1fr 3fr; }
+    .wrapper #org-header #org-logo {
+      text-align: right;
+      grid-area: logo; }
+      .wrapper #org-header #org-logo img {
+        position: relative;
+        margin: 15px;
+        height: 125px; }
+    .wrapper #org-header #org-name {
+      grid-area: name;
+      font-size: 45px;
+      margin-top: 15px; }
+  .wrapper #time {
+    font-size: 70px; }
+  .wrapper #motd, .wrapper #highlights, .wrapper #time, .wrapper #weather, .wrapper #org-list {
+    text-align: center; }
+    .wrapper #motd p, .wrapper #highlights p, .wrapper #time p, .wrapper #weather p, .wrapper #org-list p {
+      position: relative;
+      margin: 0;
+      top: 50%;
+      left: 50%;
+      -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%); }
+  .wrapper #org-list span img {
+    height: 100px;
+    margin: 13px 200px;
+    -webkit-filter: grayscale(100);
+    filter: grayscale(100);
+    opacity: 0.5;
+    -webkit-transition: opacity 1s;
+    -o-transition: opacity 1s;
+    transition: opacity 1s;
+    -webkit-transition: -webkit-filter 1s;
+    transition: -webkit-filter 1s;
+    -o-transition: filter 1s;
+    transition: filter 1s;
+    transition: filter 1s, -webkit-filter 1s; }
+  .wrapper #org-list .active img {
+    -webkit-filter: grayscale(0);
+    filter: grayscale(0);
+    opacity: 1; }

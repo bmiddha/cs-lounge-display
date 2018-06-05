@@ -1,5 +1,6 @@
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
 const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"];
+// const orgs = ["uiccs"];
 const orgs = ["acm", "lug", "wics", "uiccs"];
 const orgData = [];
 orgData["acm"] = {
@@ -8,7 +9,7 @@ orgData["acm"] = {
 	acronym: "ACM",
 	motd: "files/acm.motd",
 	highlights: "files/acm.highlights",
-	calendar: "https://calendar.google.com/calendar/ical/kc72g1ctfg8b88df34qqb62d1s%40group.calendar.google.com/public/basic.ics"
+	calendar: "https://calendar.google.com/calendar/ical/jj8ni13uoqol5v189ijah3eo9k%40group.calendar.google.com/private-f14d1576610252307d75f7eec8e26d8a/basic.ics"
 };
 orgData["lug"] = {
 	name: "Linux Users Group",
@@ -16,7 +17,7 @@ orgData["lug"] = {
 	acronym: "LUG",
 	motd: "files/lug.motd",
 	highlights: "files/lug.highlights",
-	calendar: "https://calendar.google.com/calendar/ical/ca149os3pmnh0dcopr1jn2negg%40group.calendar.google.com/public/basic.ics"
+	calendar: "https://calendar.google.com/calendar/ical/jj8ni13uoqol5v189ijah3eo9k%40group.calendar.google.com/private-f14d1576610252307d75f7eec8e26d8a/basic.ics"
 };
 orgData["wics"] = {
 	name: "Women in Computer Science",
@@ -24,7 +25,7 @@ orgData["wics"] = {
 	acronym: "WiCS",
 	motd: "files/wics.motd",
 	highlights: "files/wics.highlights",
-	calendar: ""
+	calendar: "https://calendar.google.com/calendar/ical/jj8ni13uoqol5v189ijah3eo9k%40group.calendar.google.com/private-f14d1576610252307d75f7eec8e26d8a/basic.ics"
 };
 orgData["uiccs"] = {
 	name: "UIC Computer Science",
@@ -32,7 +33,7 @@ orgData["uiccs"] = {
 	acronym: "CS",
 	motd: "files/uicCs.motd",
 	highlights: "files/uicCs.highlights",
-	calendar: ""
+	calendar: "https://calendar.google.com/calendar/ical/jj8ni13uoqol5v189ijah3eo9k%40group.calendar.google.com/private-f14d1576610252307d75f7eec8e26d8a/basic.ics"
 };
 
 function getApiData(type, arg, value) {
@@ -70,12 +71,13 @@ function timeAndDate() {
 	let hour = today.getHours();
 	let min = today.getMinutes();
 	let date = today.getDate();
-	let month = today.getMonth() + 1;
+	let month = today.getMonth();
 	let day = DAYS[today.getDay()];
 	hour = (hour > 12) ? (hour - 12) : hour;
 	min = addZero(min);
 	hour = addZero(hour);
-	document.querySelector("#time").innerHTML = hour + ":" + min + " " + day + ", " + MONTHS[month] + " " + date;
+	document.querySelector("#time>p").innerHTML = hour + ":" + min + " " + day + ", " + MONTHS[month] + " " + date;
+	setTimeout(timeAndDate, 2000);
 }
 
 function getEvents(cal) {
@@ -116,7 +118,7 @@ function getEvents(cal) {
 			content += "<span class=timeEnd>" + tmEnd + "</span>"
 			content += "<span class=description>" + result[k].description + "</span>";
 			content += "</li>";
-			document.querySelector("#events").innerHTML = content;
+			document.querySelector("#events>p").innerHTML = content;
 			k++;
 		}
 	});
@@ -124,13 +126,13 @@ function getEvents(cal) {
 
 function getMotd(file) {
 	getApiData("file", "file", file).then((result) => {
-		document.querySelector("#motd").innerHTML = result.data;
+		document.querySelector("#motd>p").innerHTML = result.data;
 	});
 }
 
 function getHighlights(file) {
 	getApiData("file", "file", file).then((result) => {
-		document.querySelector("#highlights").innerHTML = result.data;
+		document.querySelector("#highlights>p").innerHTML = result.data;
 	});
 }
 
@@ -139,8 +141,9 @@ function getWeather(city) {
 		let temp = result.main.temp;
 		let tempF = Math.round(result.main.temp * 9 / 5 - 459.67);
 		let tempC = Math.round(result.main.temp - 273.15);
-		document.querySelector("#weather").innerHTML = result.weather[0].main + "<br>" + tempF + "&#176;F | " + tempC + "&#176;C";
+		document.querySelector("#weather>p").innerHTML = "<span>" + result.weather[0].main + "</span><span>" + tempF + "&#176;F | " + tempC + "&#176;C</span>";
 	});
+	setTimeout(getWeather,30000);
 }
 
 getWeather("chicago");
