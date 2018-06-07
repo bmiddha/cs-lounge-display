@@ -1,6 +1,6 @@
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
 const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"];
-// const orgs = ["uiccs"];
+// const orgs = ["lug"];
 const orgs = ["acm", "lug", "wics", "uiccs"];
 const orgData = [];
 orgData["acm"] = {
@@ -9,7 +9,7 @@ orgData["acm"] = {
 	acronym: "ACM",
 	motd: "files/acm.motd",
 	highlights: "files/acm.highlights",
-	calendar: "https://calendar.google.com/calendar/ical/jj8ni13uoqol5v189ijah3eo9k%40group.calendar.google.com/private-f14d1576610252307d75f7eec8e26d8a/basic.ics"
+	calendar: "https://calendar.google.com/calendar/ical/kc72g1ctfg8b88df34qqb62d1s%40group.calendar.google.com/public/basic.ics"
 };
 orgData["lug"] = {
 	name: "Linux Users Group",
@@ -17,7 +17,7 @@ orgData["lug"] = {
 	acronym: "LUG",
 	motd: "files/lug.motd",
 	highlights: "files/lug.highlights",
-	calendar: "https://calendar.google.com/calendar/ical/jj8ni13uoqol5v189ijah3eo9k%40group.calendar.google.com/private-f14d1576610252307d75f7eec8e26d8a/basic.ics"
+	calendar: "https://calendar.google.com/calendar/ical/ca149os3pmnh0dcopr1jn2negg%40group.calendar.google.com/public/basic.ics"
 };
 orgData["wics"] = {
 	name: "Women in Computer Science",
@@ -25,7 +25,7 @@ orgData["wics"] = {
 	acronym: "WiCS",
 	motd: "files/wics.motd",
 	highlights: "files/wics.highlights",
-	calendar: "https://calendar.google.com/calendar/ical/jj8ni13uoqol5v189ijah3eo9k%40group.calendar.google.com/private-f14d1576610252307d75f7eec8e26d8a/basic.ics"
+	calendar: "https://calendar.google.com/calendar/ical/uicwics%40gmail.com/public/basic.ics"
 };
 orgData["uiccs"] = {
 	name: "UIC Computer Science",
@@ -33,7 +33,7 @@ orgData["uiccs"] = {
 	acronym: "CS",
 	motd: "files/uicCs.motd",
 	highlights: "files/uicCs.highlights",
-	calendar: "https://calendar.google.com/calendar/ical/jj8ni13uoqol5v189ijah3eo9k%40group.calendar.google.com/private-f14d1576610252307d75f7eec8e26d8a/basic.ics"
+	calendar: "https://calendar.google.com/calendar/ical/cik4lv50p4jrkn9a723a4bjjr0%40group.calendar.google.com/public/basic.ics"
 };
 
 function getApiData(type, arg, value) {
@@ -81,13 +81,15 @@ function timeAndDate() {
 }
 
 function getEvents(cal) {
+	document.querySelector("#events>p").innerHTML = "";	
+	document.querySelector("#events>h2").style.display = "none";	
 	getApiData("calendar", "cal", cal).then((result) => {
 		let k = 1;
 		let content = "";
 		let dtNow = new Date();
 		let oldEvents = 0;
 		while (k < result.length) {
-			if (k > 4+oldEvents) break;
+			if (k > 4 + oldEvents) break;
 			let dtStart = new Date(result[k].timeStart);
 			if (dtStart < dtNow) {
 				oldEvents++;
@@ -116,10 +118,17 @@ function getEvents(cal) {
 			content += "<span class=location>" + result[k].location + "</span>"
 			content += "<span class=timeStart>" + tmStart + "</span>"
 			content += "<span class=timeEnd>" + tmEnd + "</span>"
-			// content += "<span class=description>" + result[k].description + "</span>";
 			content += "</li>";
 			document.querySelector("#events>p").innerHTML = content;
 			k++;
+		}
+		if (document.querySelector("#events>p").innerHTML == "") {
+			document.querySelector("#noEvents").style.display = "block";
+			document.querySelector("#events>h2").style.display = "none";
+		}
+		else {
+			document.querySelector("#events>h2").style.display = "block";
+			document.querySelector("#noEvents").style.display = "none";
 		}
 	});
 }
@@ -143,7 +152,7 @@ function getWeather(city) {
 		let tempC = Math.round(result.main.temp - 273.15);
 		document.querySelector("#weather>p").innerHTML = "<span>" + result.weather[0].main + "</span><span>" + tempF + "&#176;F | " + tempC + "&#176;C</span>";
 	});
-	setTimeout(getWeather,30000);
+	setTimeout(getWeather, 30000);
 }
 
 getWeather("chicago");
@@ -158,13 +167,13 @@ function updateActiveOrg() {
 	getMotd(orgData[orgs[activeOrg]].motd);
 	getHighlights(orgData[orgs[activeOrg]].highlights);
 	getEvents(orgData[orgs[activeOrg]].calendar);
-	document.querySelector("#org-name").innerHTML = orgData[orgs[activeOrg]].name;
+	document.querySelector("#org-logo>img").alt = orgData[orgs[activeOrg]].name;
 	document.querySelector("#org-logo>img").src = orgData[orgs[activeOrg]].logo;
 	divChild = activeOrg + 1;
 	divPreviousChild = (divChild == 1) ? orgs.length : divChild - 1;
 	document.querySelector("#org-list>span:nth-child(" + divPreviousChild + ")").classList.remove("active");
 	document.querySelector("#org-list>span:nth-child(" + divChild + ")").classList.add("active");
-	setTimeout(updateActiveOrg, 15000)
+	setTimeout(updateActiveOrg, 10000)
 }
 
 function footerImages() {
