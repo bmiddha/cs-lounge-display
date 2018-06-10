@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
 
 body {
-  font-family: 'Montserrat';
+  font-family: 'Montserrat',sans-serif;
   margin: 0;
-  background: linear-gradient(270deg,#eeeeff,#ffffff);
+  background: linear-gradient(270deg,#c0bef8,#f7bec5);
   background-size: 600% 600%;
   animation: gradient 30s ease infinite;
   @keyframes gradient {
@@ -14,7 +14,7 @@ body {
 }
 
 .wrapper {
-  font-size: 35px;
+  font-size: 30px;
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -71,9 +71,8 @@ body {
   padding: 0 2ch;
   justify-content: space-evenly;
   border-right: solid;
-  font-
-  div {
-    // text-align: center;
+  p {
+    margin: 0;
   }
 }
 
@@ -82,9 +81,13 @@ body {
 }
 
 #events {
-  font-size: 50px;
+  font-size: 40px;
   padding: 0 2ch;
+  h2 {
+    margin: 0;
+  }
   p {
+    margin: 10px 0 0 0;    
     display: grid;
     li {
       display: grid;

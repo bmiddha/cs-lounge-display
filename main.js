@@ -1,6 +1,5 @@
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
 const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"];
-// const orgs = ["lug"];
 const orgs = ["acm", "lug", "wics", "uiccs"];
 const orgData = [];
 orgData["acm"] = {

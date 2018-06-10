@@ -1,11 +1,11 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat");
 body {
-  font-family: 'Montserrat';
+  font-family: 'Montserrat',sans-serif;
   margin: 0;
-  background: -webkit-gradient(linear, right top, left top, from(#eeeeff), to(#ffffff));
-  background: -webkit-linear-gradient(right, #eeeeff, #ffffff);
-  background: -o-linear-gradient(right, #eeeeff, #ffffff);
-  background: linear-gradient(270deg, #eeeeff, #ffffff);
+  background: -webkit-gradient(linear, right top, left top, from(#c0bef8), to(#f7bec5));
+  background: -webkit-linear-gradient(right, #c0bef8, #f7bec5);
+  background: -o-linear-gradient(right, #c0bef8, #f7bec5);
+  background: linear-gradient(270deg, #c0bef8, #f7bec5);
   background-size: 600% 600%;
   -webkit-animation: gradient 30s ease infinite;
   animation: gradient 30s ease infinite; }
@@ -27,7 +27,7 @@ body {
     background-position: 0% 50%; } }
 
 .wrapper {
-  font-size: 35px;
+  font-size: 30px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -105,6 +105,8 @@ body {
   -ms-flex-pack: space-evenly;
   justify-content: space-evenly;
   border-right: solid; }
+  .sidebar p {
+    margin: 0; }
 
 .main {
   -webkit-box-flex: 3;
@@ -112,9 +114,12 @@ body {
   flex: 3; }
 
 #events {
-  font-size: 50px;
+  font-size: 40px;
   padding: 0 2ch; }
+  #events h2 {
+    margin: 0; }
   #events p {
+    margin: 10px 0 0 0;
     display: grid; }
     #events p li {
       display: grid;

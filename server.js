@@ -16,7 +16,6 @@ function getEvents(calendarUrl) {
 			for (let k in data) {
 				if (data.hasOwnProperty(k)) {
 					let ev = data[k];
-					console.log(ev)
 					let event = {
 						summary: ev.summary,
 						timeStart: ev.start,
@@ -27,7 +26,6 @@ function getEvents(calendarUrl) {
 					eventData.push(event);
 				}
 			}
-			console.log(eventData)
 			resolve(eventData);
 		});
 	});
