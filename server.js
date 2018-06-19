@@ -59,18 +59,23 @@ function getFile(file) {
 	return new Promise((resolve, reject) => {
 		let fileData = {};
 		fs.readFile(file, 'utf8', (err, data) => {
-			data = data.replace(/(?:\r\n|\r|\n)/g, '<br>');
-			fileData = {
-				data: data
-			};
-			resolve(fileData);
+			if (!data) resolve ("");
+			else {
+				data = data.replace(/(?:\r\n|\r|\n)/g, '<br>');
+				fileData = {
+					data: data
+				};
+				resolve(fileData);
+			}
 		});
 	});
 }
 
+const cors = require('cors');
+app.use(cors());
 app.use(function (req, res, next) {
-	res.header("Access-Control-Allow-Origin", "*");
-	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	// res.header("Access-Control-Allow-Origin", "*");
+	// res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 	next();
 });
 

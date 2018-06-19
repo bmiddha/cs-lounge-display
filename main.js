@@ -1,3 +1,4 @@
+const city= "chicago";
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
 const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"];
 const orgs = ["acm", "lug", "wics", "uiccs"];
@@ -144,18 +145,16 @@ function getHighlights(file) {
 	});
 }
 
-function getWeather(city) {
+function getWeather() {
 	getApiData("weather", "city", city).then((result) => {
 		let temp = result.main.temp;
-		let tempF = Math.round(result.main.temp * 9 / 5 - 459.67);
-		let tempC = Math.round(result.main.temp - 273.15);
+		let tempF = Math.round(temp * 9 / 5 - 459.67);
+		let tempC = Math.round(temp - 273.15);
 		document.querySelector("#weather>p").innerHTML = "<span>" + result.weather[0].main + "</span><span>" + tempF + "&#176;F | " + tempC + "&#176;C</span>";
+		console.log("updating weather", result);
 	});
-	setTimeout(getWeather, 30000);
+	setTimeout(getWeather, 60000);
 }
-
-getWeather("chicago");
-timeAndDate();
 
 var activeOrg = 0;
 var counter = 0;
@@ -181,5 +180,7 @@ function footerImages() {
 		document.querySelector("#org-list").innerHTML += "<span><img src='" + orgData[orgs[j]].logo + "'alt='" + orgData[orgs[j]].name + "'></span>";
 }
 
+getWeather();
+timeAndDate();
 footerImages();
 updateActiveOrg();
