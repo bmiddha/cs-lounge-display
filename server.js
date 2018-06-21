@@ -59,7 +59,7 @@ function getFile(file) {
 	return new Promise((resolve, reject) => {
 		let fileData = {};
 		fs.readFile(file, 'utf8', (err, data) => {
-			if (!data) resolve ("");
+			if (!data) resolve ({data: " "});
 			else {
 				data = data.replace(/(?:\r\n|\r|\n)/g, '<br>');
 				fileData = {
