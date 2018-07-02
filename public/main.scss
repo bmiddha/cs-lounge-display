@@ -4,13 +4,8 @@ body {
   font-family: 'Montserrat',sans-serif;
   margin: 0;
   background: linear-gradient(270deg,#c0bef8,#f7bec5);
-  background-size: 600% 600%;
-  animation: gradient 30s ease infinite;
-  @keyframes gradient {
-      0%{background-position:0% 50%}
-      50%{background-position:100% 50%}
-      100%{background-position:0% 50%}
-  }
+  background: #000000;
+  color: #ffffff
 }
 
 .wrapper {
@@ -55,12 +50,17 @@ body {
 #time, #weather {
   text-align: center;
   flex: 1;
-  font-size: 65px;
+  font-size: 55px;
   p {
     margin: 0;
   }
   span {
+    display: inline;
     margin: 0 10px;
+  }
+  i {
+    position: relative;
+    top: 5px;
   }
 }
 
@@ -87,7 +87,7 @@ body {
     margin: 0;
   }
   p {
-    margin: 10px 0 0 0;    
+    margin: 10px 0 0 0;
     display: grid;
     li {
       display: grid;

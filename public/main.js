@@ -81,8 +81,8 @@ function timeAndDate() {
 }
 
 function getEvents(cal) {
-	document.querySelector("#events>p").innerHTML = "";	
-	document.querySelector("#events>h2").style.display = "none";	
+	document.querySelector("#events>p").innerHTML = "";
+	document.querySelector("#events>h2").style.display = "none";
 	getApiData("calendar", "cal", cal).then((result) => {
 		let k = 1;
 		let content = "";
@@ -150,8 +150,9 @@ function getWeather() {
 		let temp = result.main.temp;
 		let tempF = Math.round(temp * 9 / 5 - 459.67);
 		let tempC = Math.round(temp - 273.15);
-		document.querySelector("#weather>p").innerHTML = "<span>" + result.weather[0].main + "</span><span>" + tempF + "&#176;F | " + tempC + "&#176;C</span>";
-		console.log("updating weather", result);
+		let timeNow = new Date();
+		let dayNight = (timeNow.getHours() >= 22 || timeNow.getHours() <= 4) ? 'n' : 'd';
+		document.querySelector("#weather>p").innerHTML = "<i class='owf owf-" + result.weather[0].id + "-" + dayNight + "'></i><span>" + result.weather[0].main + "</span><span>" + tempF + "&#176;F | " + tempC + "&#176;C</span>";
 	});
 	setTimeout(getWeather, 60000);
 }
