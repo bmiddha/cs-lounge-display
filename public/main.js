@@ -9,7 +9,7 @@ orgData["acm"] = {
 	acronym: "ACM",
 	motd: "files/acm.motd",
 	highlights: "files/acm.highlights",
-	calendar: "https://calendar.google.com/calendar/ical/kc72g1ctfg8b88df34qqb62d1s%40group.calendar.google.com/public/basic.ics"
+	calendar: "https://calendar.google.com/calendar/ical/kc72g1ctfg8b88df34qqb62d1s%40group.calendar.google.com/public/basic.ics",
 };
 orgData["lug"] = {
 	name: "Linux Users Group",
@@ -17,7 +17,7 @@ orgData["lug"] = {
 	acronym: "LUG",
 	motd: "files/lug.motd",
 	highlights: "files/lug.highlights",
-	calendar: "https://calendar.google.com/calendar/ical/ca149os3pmnh0dcopr1jn2negg%40group.calendar.google.com/public/basic.ics"
+	calendar: "https://calendar.google.com/calendar/ical/ca149os3pmnh0dcopr1jn2negg%40group.calendar.google.com/public/basic.ics",
 };
 orgData["wics"] = {
 	name: "Women in Computer Science",
@@ -25,7 +25,7 @@ orgData["wics"] = {
 	acronym: "WiCS",
 	motd: "files/wics.motd",
 	highlights: "files/wics.highlights",
-	calendar: "https://calendar.google.com/calendar/ical/uicwics%40gmail.com/public/basic.ics"
+	calendar: "https://calendar.google.com/calendar/ical/uicwics%40gmail.com/public/basic.ics",
 };
 orgData["uiccs"] = {
 	name: "UIC Computer Science",
@@ -33,7 +33,7 @@ orgData["uiccs"] = {
 	acronym: "CS",
 	motd: "files/uicCs.motd",
 	highlights: "files/uicCs.highlights",
-	calendar: "https://calendar.google.com/calendar/ical/cik4lv50p4jrkn9a723a4bjjr0%40group.calendar.google.com/public/basic.ics"
+	calendar: "https://calendar.google.com/calendar/ical/cik4lv50p4jrkn9a723a4bjjr0%40group.calendar.google.com/public/basic.ics",
 };
 
 function getApiData(type, arg, value) {
@@ -114,10 +114,10 @@ function getEvents(cal) {
 			tmEndHour = addZero(tmEndHour);
 			tmEnd = DAYS[dtEnd.getDay()] + ", " + MONTHS[dtEnd.getMonth()] + " " + dtEnd.getDate() + " " + tmEndHour + ":" + addZero(dtEnd.getMinutes()) + tmEndAmPm;
 			content += "<li>";
-			content += "<span class=summary>" + result[k].summary + "</span>"
-			content += "<span class=location>" + result[k].location + "</span>"
-			content += "<span class=timeStart>" + tmStart + "</span>"
-			content += "<span class=timeEnd>" + tmEnd + "</span>"
+			content += "<span class=summary>" + result[k].summary + "</span>";
+			content += "<span class=location>" + result[k].location + "</span>";
+			content += "<span class=timeStart>" + tmStart + "</span>";
+			content += "<span class=timeEnd>" + tmEnd + "</span>";
 			content += "</li>";
 			document.querySelector("#events>p").innerHTML = content;
 			k++;
@@ -151,7 +151,7 @@ function getWeather() {
 		let tempF = Math.round(temp * 9 / 5 - 459.67);
 		let tempC = Math.round(temp - 273.15);
 		let timeNow = new Date();
-		let dayNight = (timeNow.getHours() >= 22 || timeNow.getHours() <= 4) ? 'n' : 'd';
+		let dayNight = (timeNow.getHours() >= 19 || timeNow.getHours() <= 4) ? "n" : "d";
 		document.querySelector("#weather>p").innerHTML = "<i class='owf owf-" + result.weather[0].id + "-" + dayNight + "'></i><span>" + result.weather[0].main + "</span><span>" + tempF + "&#176;F | " + tempC + "&#176;C</span>";
 	});
 	setTimeout(getWeather, 60000);
@@ -168,11 +168,11 @@ function updateActiveOrg() {
 	getEvents(orgData[orgs[activeOrg]].calendar);
 	document.querySelector("#org-logo>img").alt = orgData[orgs[activeOrg]].name;
 	document.querySelector("#org-logo>img").src = orgData[orgs[activeOrg]].logo;
-	divChild = activeOrg + 1;
-	divPreviousChild = (divChild == 1) ? orgs.length : divChild - 1;
+	let divChild = activeOrg + 1;
+	let divPreviousChild = (divChild == 1) ? orgs.length : divChild - 1;
 	document.querySelector("#org-list>span:nth-child(" + divPreviousChild + ")").classList.remove("active");
 	document.querySelector("#org-list>span:nth-child(" + divChild + ")").classList.add("active");
-	setTimeout(updateActiveOrg, 10000)
+	setTimeout(updateActiveOrg, 10000);
 }
 
 function footerImages() {
