@@ -12,6 +12,9 @@ console.log("Server started on port " + port);
 function getEvents(calendarUrl) {
 	return new Promise((resolve, reject) => {
 		ical.fromURL(calendarUrl, {}, (err, data) => {
+			if(err){
+				throw err;
+			}
 			let eventData = [];
 			for (let k in data) {
 				if (data.hasOwnProperty(k)) {
@@ -59,6 +62,9 @@ function getFile(file) {
 	return new Promise((resolve, reject) => {
 		let fileData = {};
 		fs.readFile(file, 'utf8', (err, data) => {
+			if(err){
+				throw err;
+			}
 			if (!data) resolve ({data: " "});
 			else {
 				data = data.replace(/(?:\r\n|\r|\n)/g, '<br>');
