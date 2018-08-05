@@ -29,10 +29,10 @@ orgData["wics"] = {
 };
 orgData["uiccs"] = {
 	name: "UIC Computer Science",
-	logo: "images/uicCsLogo.png",
+	logo: "images/uiccsLogo.png",
 	acronym: "CS",
-	motd: "files/uicCs.motd",
-	highlights: "files/uicCs.highlights",
+	motd: "files/uiccs.motd",
+	highlights: "files/uiccs.highlights",
 	calendar: "https://calendar.google.com/calendar/ical/cik4lv50p4jrkn9a723a4bjjr0%40group.calendar.google.com/public/basic.ics",
 };
 
