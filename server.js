@@ -9,26 +9,34 @@ const openWeatherApiKey = process.env.OPEN_WEATHER_MAP_API_KEY;
 app.listen(port);
 console.log("Server started on port " + port);
 
+/**
+ * @typedef {object} ShortEvent
+ * @prop {string} summary
+ * @prop {string} timeStart
+ * @prop {string} timeEnd
+ * @prop {string} location
+ * @prop {string} description
+ * @param {string} calendarUrl 
+ * @return {Promise<Array<ShortEvent>>}
+ */
 function getEvents(calendarUrl) {
 	return new Promise((resolve, reject) => {
 		ical.fromURL(calendarUrl, {}, (err, data) => {
-			if(err){
-				throw err;
-			}
-			let eventData = [];
-			for (let k in data) {
-				if (data.hasOwnProperty(k)) {
-					let ev = data[k];
-					let event = {
-						summary: ev.summary,
-						timeStart: ev.start,
-						timeEnd: ev.end,
-						location: ev.location,
-						description: ev.description,
-					};
-					eventData.push(event);
-				}
-			}
+			if (err) reject(err);
+			const dtNow = new Date();
+			const eventData = Object.values(data).filter((event) => {
+				return (new Date(event.start)) > dtNow;
+			}).sort((event1, event2) => {
+				const e1Time = (new Date(event1.start)).getTime();
+				const e2Time = (new Date(event2.start)).getTime();
+				return e1Time - e2Time;
+			}).map((ev) => ({
+				summary: ev.summary,
+				timeStart: ev.start,
+				timeEnd: ev.end,
+				location: ev.location,
+				description: ev.description,
+			}));
 			resolve(eventData);
 		});
 	});
