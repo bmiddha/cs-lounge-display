@@ -50,7 +50,7 @@ body {
 #time, #weather {
   text-align: center;
   flex: 1;
-  font-size: 55px;
+  font-size: 50px;
   p {
     margin: 0;
   }
@@ -67,11 +67,16 @@ body {
 .sidebar {
   display: flex;
   flex-direction: column;
-  flex: 1.3;
+  flex: 1.4;
   padding: 0 2ch;
-  justify-content: space-evenly;
   border-right: solid;
+  .header-cell {
+    height: 200px;
+    // background: teal;
+    margin-top: 50px;
+  }
   p {
+    // background: red;
     margin: 0;
   }
 }
@@ -80,13 +85,13 @@ body {
   flex: 3;
 }
 
-#events {
+#hero {
   font-size: 40px;
   padding: 0 2ch;
   h2 {
     margin: 0;
   }
-  p {
+  p.cal {
     margin: 10px 0 0 0;
     display: grid;
     li {
@@ -110,6 +115,9 @@ body {
         text-align: right;
       }
     }
+  }
+  p.ad {
+    font-size: 28px;
   }
 }
 

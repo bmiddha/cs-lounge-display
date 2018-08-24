@@ -1,5 +1,5 @@
 require("dotenv").config();
-const ical = require('ical');
+const ical = require("ical");
 const http = require("http");
 const fs = require("fs");
 const express = require("express");
@@ -24,7 +24,7 @@ function getEvents(calendarUrl) {
 						timeStart: ev.start,
 						timeEnd: ev.end,
 						location: ev.location,
-						description: ev.description
+						description: ev.description,
 					};
 					eventData.push(event);
 				}
@@ -61,15 +61,15 @@ function getWeather(city) {
 function getFile(file) {
 	return new Promise((resolve, reject) => {
 		let fileData = {};
-		fs.readFile(file, 'utf8', (err, data) => {
+		fs.readFile(file, "utf8", (err, data) => {
 			if(err){
 				throw err;
 			}
 			if (!data) resolve ({data: " "});
 			else {
-				data = data.replace(/(?:\r\n|\r|\n)/g, '<br>');
+				data = data.replace(/(?:\r\n|\r|\n)/g, "<br>");
 				fileData = {
-					data: data
+					data: data,
 				};
 				resolve(fileData);
 			}
@@ -77,9 +77,9 @@ function getFile(file) {
 	});
 }
 
-const cors = require('cors');
+const cors = require("cors");
 app.use(cors());
-app.use(express.static('public'));
+app.use(express.static("public"));
 app.use(function (req, res, next) {
 	// res.header("Access-Control-Allow-Origin", "*");
 	// res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
