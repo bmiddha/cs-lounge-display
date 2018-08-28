@@ -1,6 +1,6 @@
 require("dotenv").config();
 const ical = require("ical");
-const http = require("http");
+const http = require("https");
 const fs = require("fs");
 const express = require("express");
 const app = express();
@@ -58,7 +58,7 @@ function getFromUrl(url) {
 
 function getWeather(city) {
 	return new Promise((resolve, reject) => {
-		var weatherUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + openWeatherApiKey;
+		var weatherUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + openWeatherApiKey;
 		getFromUrl(weatherUrl).then((result) => {
 			let weatherJson = JSON.parse(result);
 			resolve(weatherJson);
@@ -70,12 +70,14 @@ function getFile(file) {
 	return new Promise((resolve, reject) => {
 		let fileData = {};
 		fs.readFile(file, "utf8", (err, data) => {
-			if(err){
+			if (err) {
 				throw err;
 			}
-			if (!data) resolve ({data: " "});
+			if (!data) resolve({
+				data: " "
+			});
 			else {
-				data = data.replace(/(?:\r\n|\r|\n)/g, "<br>");
+				// data = data.replace(/(?:\r\n|\r|\n)/g, "<br>");
 				fileData = {
 					data: data,
 				};
@@ -89,8 +91,6 @@ const cors = require("cors");
 app.use(cors());
 app.use(express.static("public"));
 app.use(function (req, res, next) {
-	// res.header("Access-Control-Allow-Origin", "*");
-	// res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 	next();
 });
 

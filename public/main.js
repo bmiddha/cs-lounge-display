@@ -1,4 +1,5 @@
 const city= "chicago";
+const orgTimeout = 15;
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
 const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"];
 const orgs = ["acm", "lug", "wics", "uiccs", "uiccs2"];
@@ -8,7 +9,7 @@ orgData["acm"] = {
 	name: "Association for Computing Machinery",
 	logo: "images/acmLogo.png",
 	acronym: "ACM",
-	motd: "files/acm.motd",
+	motd: "files/acm-motd.html",
 	calendar: "https://calendar.google.com/calendar/ical/kc72g1ctfg8b88df34qqb62d1s%40group.calendar.google.com/public/basic.ics",
 };
 orgData["lug"] = {
@@ -16,7 +17,7 @@ orgData["lug"] = {
 	name: "Linux Users Group",
 	logo: "images/lugLogo.png",
 	acronym: "LUG",
-	motd: "files/lug.motd",
+	motd: "files/lug-motd.html",
 	calendar: "https://calendar.google.com/calendar/ical/ca149os3pmnh0dcopr1jn2negg%40group.calendar.google.com/public/basic.ics",
 };
 orgData["wics"] = {
@@ -24,7 +25,7 @@ orgData["wics"] = {
 	name: "Women in Computer Science",
 	logo: "images/wicsLogo.png",
 	acronym: "WiCS",
-	motd: "files/wics.motd",
+	motd: "files/wics-motd.html",
 	calendar: "https://calendar.google.com/calendar/ical/uicwics%40gmail.com/public/basic.ics",
 };
 orgData["uiccs"] = {
@@ -32,7 +33,7 @@ orgData["uiccs"] = {
 	name: "UIC Computer Science",
 	logo: "images/uiccsLogo.png",
 	acronym: "CS",
-	motd: "files/uiccs.motd",
+	motd: "files/uiccs-motd.html",
 	calendar: "https://calendar.google.com/calendar/ical/cik4lv50p4jrkn9a723a4bjjr0%40group.calendar.google.com/public/basic.ics",
 };
 orgData["uiccs2"] = {
@@ -40,8 +41,8 @@ orgData["uiccs2"] = {
 	name: "UIC Computer Science",
 	logo: "images/uiccsLogo.png",
 	acronym: "CS",
-	motd: "files/uiccs.motd",
-	adData: "files/uiccs.ad",
+	motd: "files/uiccs2-motd.html ",
+	adData: "files/uiccs-ad.html",
 };
 
 function getApiData(type, arg, value) {
@@ -172,7 +173,7 @@ function updateActiveOrg() {
 	let divPreviousChild = (divChild == 1) ? orgs.length : divChild - 1;
 	document.querySelector("#org-list>span:nth-child(" + divPreviousChild + ")").classList.remove("active");
 	document.querySelector("#org-list>span:nth-child(" + divChild + ")").classList.add("active");
-	setTimeout(updateActiveOrg, 10000);
+	setTimeout(updateActiveOrg, orgTimeout*1000);
 }
 
 function footerImages() {
