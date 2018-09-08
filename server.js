@@ -37,6 +37,7 @@ function getEvents(calendarUrl) {
 				location: ev.location,
 				description: ev.description,
 			}));
+			console.log(eventData);
 			resolve(eventData);
 		});
 	});
@@ -77,7 +78,6 @@ function getFile(file) {
 				data: " "
 			});
 			else {
-				// data = data.replace(/(?:\r\n|\r|\n)/g, "<br>");
 				fileData = {
 					data: data,
 				};
