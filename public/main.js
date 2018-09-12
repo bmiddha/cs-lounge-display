@@ -1,49 +1,7 @@
-const city= "chicago";
-const orgTimeout = 15;
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
 const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"];
-const orgs = ["acm", "lug", "wics", "uiccs", "uiccs2"];
-const orgData = [];
-orgData["acm"] = {
-	type: "cal",
-	name: "Association for Computing Machinery",
-	logo: "images/acmLogo.png",
-	acronym: "ACM",
-	motd: "files/acm-motd.html",
-	calendar: "https://calendar.google.com/calendar/ical/kc72g1ctfg8b88df34qqb62d1s%40group.calendar.google.com/public/basic.ics",
-};
-orgData["lug"] = {
-	type: "cal",
-	name: "Linux Users Group",
-	logo: "images/lugLogo.png",
-	acronym: "LUG",
-	motd: "files/lug-motd.html",
-	calendar: "https://calendar.google.com/calendar/ical/ca149os3pmnh0dcopr1jn2negg%40group.calendar.google.com/public/basic.ics",
-};
-orgData["wics"] = {
-	type: "cal",
-	name: "Women in Computer Science",
-	logo: "images/wicsLogo.png",
-	acronym: "WiCS",
-	motd: "files/wics-motd.html",
-	calendar: "https://calendar.google.com/calendar/ical/uicwics%40gmail.com/public/basic.ics",
-};
-orgData["uiccs"] = {
-	type: "cal",
-	name: "UIC Computer Science",
-	logo: "images/uiccsLogo.png",
-	acronym: "CS",
-	motd: "files/uiccs-motd.html",
-	calendar: "https://calendar.google.com/calendar/ical/cik4lv50p4jrkn9a723a4bjjr0%40group.calendar.google.com/public/basic.ics",
-};
-orgData["uiccs2"] = {
-	type: "ad",
-	name: "UIC Computer Science",
-	logo: "images/uiccsLogo.png",
-	acronym: "CS",
-	motd: "files/uiccs2-motd.html ",
-	adData: "files/uiccs-ad.html",
-};
+
+var config;
 
 function getApiData(type, arg, value) {
 	return new Promise((resolve, reject) => {
@@ -89,7 +47,6 @@ function getEvents(cal) {
 	document.querySelector("#hero>p").classList = "cal";
 	document.querySelector("#hero>p").innerHTML = "";
 	getApiData("calendar", "cal", cal).then((result) => {
-		console.log(result);
 		let k = 0;
 		let content = "<h2>Upcoming Events</h2>";
 		let dtNow = new Date();
@@ -138,7 +95,7 @@ function getMotd(file) {
 }
 
 function getWeather() {
-	getApiData("weather", "city", city).then((result) => {
+	getApiData("weather", "city", config.city).then((result) => {
 		let temp = result.main.temp;
 		let tempF = Math.round(temp * 9 / 5 - 459.67);
 		let tempC = Math.round(temp - 273.15);
@@ -157,33 +114,36 @@ function getAd(file) {
 	});
 }
 
-var activeOrg = 0; 
+var activeOrg = 0;
 var counter = 0;
 
 function updateActiveOrg() {
-	activeOrg = counter % orgs.length;
+	activeOrg = counter % config.orgData.length;
 	counter++;
-	getMotd(orgData[orgs[activeOrg]].motd);
-	if (orgData[orgs[activeOrg]].type == "cal")
-		getEvents(orgData[orgs[activeOrg]].calendar);
-	else if (orgData[orgs[activeOrg]].type == "ad")
-		getAd(orgData[orgs[activeOrg]].adData);
-	document.querySelector("#org-logo>img").alt = orgData[orgs[activeOrg]].name;
-	document.querySelector("#org-logo>img").src = orgData[orgs[activeOrg]].logo;
+	getMotd(config.orgData[activeOrg].motd);
+	if (config.orgData[activeOrg].type == "cal")
+		getEvents(config.orgData[activeOrg].calendar);
+	else if (config.orgData[activeOrg].type == "ad")
+		getAd(config.orgData[activeOrg].adData);
+	document.querySelector("#org-logo>img").alt = config.orgData[activeOrg].name;
+	document.querySelector("#org-logo>img").src = config.orgData[activeOrg].logo;
 	let divChild = activeOrg + 1;
-	let divPreviousChild = (divChild == 1) ? orgs.length : divChild - 1;
+	let divPreviousChild = (divChild == 1) ? config.orgData.length : divChild - 1;
 	document.querySelector("#org-list>span:nth-child(" + divPreviousChild + ")").classList.remove("active");
 	document.querySelector("#org-list>span:nth-child(" + divChild + ")").classList.add("active");
-	setTimeout(updateActiveOrg, orgTimeout*1000);
+	setTimeout(updateActiveOrg, config.orgTimeout * 1000);
 }
 
 function footerImages() {
 	document.querySelector("#org-list").innerHTML = "";
-	for (let j = 0; j < orgs.length; j++)
-		document.querySelector("#org-list").innerHTML += "<span><img src='" + orgData[orgs[j]].logo + "'alt='" + orgData[orgs[j]].name + "'></span>";
+	for (let j = 0; j < config.orgData.length; j++)
+		document.querySelector("#org-list").innerHTML += "<span><img src='" + config.orgData[j].logo + "'alt='" + config.orgData[j].name + "'></span>";
 }
 
-getWeather();
-timeAndDate();
-footerImages();
-updateActiveOrg();
+fetch("config.json").then(response => response.json()).then((json) => {
+	config = json;
+	getWeather();
+	timeAndDate();
+	footerImages();
+	updateActiveOrg();
+});

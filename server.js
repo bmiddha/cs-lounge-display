@@ -37,7 +37,6 @@ function getEvents(calendarUrl) {
 				location: ev.location,
 				description: ev.description,
 			}));
-			console.log(eventData);
 			resolve(eventData);
 		});
 	});
@@ -75,7 +74,7 @@ function getFile(file) {
 				throw err;
 			}
 			if (!data) resolve({
-				data: " "
+				data: " ",
 			});
 			else {
 				fileData = {
