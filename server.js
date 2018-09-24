@@ -25,7 +25,7 @@ function getEvents(calendarUrl) {
 			if (err) reject(err);
 			const dtNow = new Date();
 			const eventData = Object.values(data).filter((event) => {
-				return (new Date(event.start)) > dtNow;
+				return (new Date(event.start)) >= dtNow;
 			}).sort((event1, event2) => {
 				const e1Time = (new Date(event1.start)).getTime();
 				const e2Time = (new Date(event2.start)).getTime();
