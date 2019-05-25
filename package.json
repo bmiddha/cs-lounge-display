@@ -19,7 +19,7 @@
   "homepage": "https://github.com/lugatuic/cs-lounge-display#readme",
   "devDependencies": {
     "eslint": "^5.0.1",
-    "nodemon": "^1.17.5"
+    "nodemon": "^1.19.0"
   },
   "dependencies": {
     "cors": "^2.8.4",
