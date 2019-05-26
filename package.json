@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/lugatuic/cs-lounge-display#readme",
   "devDependencies": {
-    "eslint": "^5.0.1",
+    "eslint": "^5.16.0",
     "nodemon": "^1.17.5"
   },
   "dependencies": {
