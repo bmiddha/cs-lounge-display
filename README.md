@@ -1,3 +1,5 @@
+This project is archived. Project tempus https://github.com/bmiddha/tempus will continue the legacy of this project.
+
 # cs-lounge-display
 
 A web app that displays info and upcoming events about the CS department and CS student organizations at UIC
