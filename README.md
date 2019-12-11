@@ -1,4 +1,4 @@
-This project is archived. Project tempus https://github.com/bmiddha/tempus will continue the legacy of this project.
+_This project is archived. Project tempus https://github.com/bmiddha/tempus will continue the legacy of this project._
 
 # cs-lounge-display
 
