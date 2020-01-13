@@ -1,0 +1,15 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  publish-docker:
+      runs-on: ubuntu-latest
+      steps:
+      - uses: actions/checkout@v1
+      - name: Publish the Docker image
+        if: github.ref == 'refs/heads/master'
+        run: |
+          docker build . --file Dockerfile --tag ${{ secrets.registry_host }}/${{ github.repository }}:latest
+          docker login ${{ secrets.registry_host }} --username ${{ secrets.registry_user }} --password ${{ secrets.registry_password }}
+          docker push ${{ secrets.registry_host }}/${{ github.repository }}:latest

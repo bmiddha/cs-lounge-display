@@ -19,12 +19,12 @@
   "homepage": "https://github.com/lugatuic/cs-lounge-display#readme",
   "devDependencies": {
     "eslint": "^5.16.0",
-    "nodemon": "^1.19.1"
+    "nodemon": "^1.19.4"
   },
   "dependencies": {
     "cors": "^2.8.4",
     "dotenv": "^5.0.1",
     "express": "^4.17.1",
-    "ical": "peterbraden/ical.js"
+    "ical": "github:peterbraden/ical.js"
   }
 }
