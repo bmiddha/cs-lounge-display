@@ -1,7 +1,38 @@
 {
 	"city": "chicago",
-	"orgTimeout": 5,
-	"orgData": [
+	"orgTimeout": 15,
+	"orgData": [{
+		"type": "cal",
+		"name": "Association for Computing Machinery",
+		"logo": "images/acmLogo.png",
+		"acronym": "ACM",
+		"motd": "files/acm-motd.html",
+		"calendar": "https://calendar.google.com/calendar/ical/kc72g1ctfg8b88df34qqb62d1s%40group.calendar.google.com/public/basic.ics"
+	},
+	{
+		"type": "cal",
+		"name": "Linux Users Group",
+		"logo": "images/lugLogo.png",
+		"acronym": "LUG",
+		"motd": "files/lug-motd.html",
+		"calendar": "https://calendar.google.com/calendar/ical/ca149os3pmnh0dcopr1jn2negg%40group.calendar.google.com/public/basic.ics"
+	},
+	{
+		"type": "cal",
+		"name": "Women in Computer Science",
+		"logo": "images/wicsLogo.png",
+		"acronym": "WiCS",
+		"motd": "files/wics-motd.html",
+		"calendar": "https://calendar.google.com/calendar/ical/uicwics%40gmail.com/public/basic.ics"
+	},
+	{
+		"type": "cal",
+		"name": "UIC Computer Science",
+		"logo": "images/uiccsLogo.png",
+		"acronym": "CS",
+		"motd": "files/uiccs-motd.html",
+		"calendar": "https://calendar.google.com/calendar/ical/cik4lv50p4jrkn9a723a4bjjr0%40group.calendar.google.com/public/basic.ics"
+	},
 	{
 		"type": "ad",
 		"name": "UIC Computer Science",

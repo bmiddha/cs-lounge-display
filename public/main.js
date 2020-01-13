@@ -46,7 +46,7 @@ function timeAndDate() {
 function getEvents(cal) {
 	document.querySelector("#hero>p").classList = "cal";
 	document.querySelector("#hero>p").innerHTML = "";
-	getApiData("calendar", "cal", cal).then((result) => {
+	getApiData("calendar", "cal", encodeURIComponent(cal)).then((result) => {
 		let k = 0;
 		let content = "<h2>Upcoming Events</h2>";
 		let dtNow = new Date();
